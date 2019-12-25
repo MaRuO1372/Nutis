@@ -3,8 +3,8 @@ package com.company.registration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,9 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public String TAG = "Status";
     private FirebaseAuth mAuth;
-    //private FirebaseAuth.AuthStateListener mAuthListener;
 
     private EditText ETemail;
     private EditText ETpassword;
@@ -29,21 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-
-       /* mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-
-                } else {
-                    // User is signed out
-
-                }
-
-            }
-        };*/
 
         ETemail = findViewById(R.id.et_email);
         ETpassword = findViewById(R.id.et_password);
@@ -68,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this,SecondActivity.class));
                 } else
                     Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
             }
@@ -80,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(task.isSuccessful())
                 {
                     Toast.makeText(MainActivity.this, "Successful registration", Toast.LENGTH_SHORT).show();
-                    //FirebaseUser user = mAuth.getCurrentUser();
+                    startActivity(new Intent(MainActivity.this,SecondActivity.class));
                 }
                 else
                     Toast.makeText(MainActivity.this, "\n" +
