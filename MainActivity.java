@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-    public void signIn(String email , String password) {
+    public void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
             @Override
@@ -73,18 +73,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-        public void registration (String email , String password){
+    public void registration (String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
                     Toast.makeText(MainActivity.this, "Successful registration", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "createUserWithEmail:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    //FirebaseUser user = mAuth.getCurrentUser();
                 }
                 else
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
                     Toast.makeText(MainActivity.this, "\n" +
                             "Invalid username or password", Toast.LENGTH_SHORT).show();
             }
